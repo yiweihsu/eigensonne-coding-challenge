@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use GuzzleHttp\Client;
 
 class NewsController
 {
@@ -66,6 +67,15 @@ class NewsController
         mail('feedback@yoursite.com', '[YourSite] Feedback', $message);
     
         return new Response('Thank you for your feedback!', 201);
+    }
+
+    public function getTopstories(Request $request)
+    {
+        $client = new GuzzleHttp\Client();
+        $res = $client->request('GET', 'https://hacker-news.firebaseio.com/v0/user/jl.json');
+        echo $res->getStatusCode();
+        echo $res->getHeader('content-type');
+        echo $res->getBody();
     }
 
 }
