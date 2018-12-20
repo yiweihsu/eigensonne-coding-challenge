@@ -4,3 +4,5 @@
 - controller as class or controller as service
 
 - logger > monolog provider
+
+- composer update
