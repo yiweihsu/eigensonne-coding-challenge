@@ -12,6 +12,7 @@ class NewsControllerProvider implements ControllerProviderInterface
     {
         $newsController = $app['controllers_factory'];
         $newsController->get('/', 'Controllers\NewsController::getPosts')->bind('homepage');
+        $newsController->get('/news', 'Controllers\NewsController::getPosts')->bind('homepage');
         $newsController->get('/feed', 'Controllers\NewsController::getTopstories')->bind('feed');
  
         return $newsController;

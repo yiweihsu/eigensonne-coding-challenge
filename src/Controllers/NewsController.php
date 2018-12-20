@@ -11,22 +11,6 @@ use GuzzleHttp\Client;
 
 class NewsController
 {
-    // protected $newsService;
-
-    // protected $blogPosts = array(
-    //     1 => array(
-    //         'date'      => '2011-03-29',
-    //         'author'    => 'igorw',
-    //         'title'     => 'Using Silex',
-    //         'body'      => '...',
-    //     ),
-    // );
-
-    // public function __construct($blogPosts)
-    // {
-    //     $this->blogPosts = $blogPosts;
-    // }
-
     public function getPosts()
     {
 
@@ -46,27 +30,6 @@ class NewsController
         }
 
         return $output;
-    }
-
-    public function getPostById($id)
-    {
-        if (!isset($blogPosts[$id])) {
-            $app->abort(404, "Post $id does not exist.");
-        }
-    
-        $post = $blogPosts[$id];
-    
-        return  "<h1>{$post['title']}</h1>".
-                "<p>{$post['body']}</p>" . 
-                $id;
-    }
-
-    public function getFeedback(Request $request)
-    {
-        $message = $request->get('message');
-        mail('feedback@yoursite.com', '[YourSite] Feedback', $message);
-    
-        return new Response('Thank you for your feedback!', 201);
     }
 
     public function getTopstories(Request $request)
