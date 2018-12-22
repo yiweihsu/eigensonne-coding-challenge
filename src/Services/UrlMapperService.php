@@ -2,9 +2,6 @@
 
 namespace Services;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
-
 class UrlMapperService
 {
   // https://hacker-news.firebaseio.com/v0/topstories.json
