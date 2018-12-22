@@ -2,12 +2,14 @@
 
 namespace Controllers;
 
+use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 
 class NewsController
 {
@@ -32,13 +34,29 @@ class NewsController
         return $output;
     }
 
-    public function getTopstories(Request $request)
+    public function getTopstories()
     {
-        $client = new GuzzleHttp\Client();
+        $client = new Client();
         $res = $client->request('GET', 'https://hacker-news.firebaseio.com/v0/user/jl.json');
         echo $res->getStatusCode();
         echo $res->getHeader('content-type');
-        echo $res->getBody();
+        return $res->getBody();
     }
 
+    public function getItems(Application $app)
+    {
+        $apiFetcher = $app['api.fetcher'];
+
+        try {
+            $result = $apiFetcher->getItems('https://hacker-news.firebaseio.com/v0/user/jl.json');
+        } catch(GuzzleException $exception) {
+            return $exception;
+        } catch (NotFoundHttpException $exception) {
+            return $exception;
+        } catch (\Exception $exception) {
+            return $exception;
+        }
+
+        return $result;
+    }
 }
