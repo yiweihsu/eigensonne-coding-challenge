@@ -7,6 +7,14 @@ use GuzzleHttp\Exception\GuzzleException;
 
 class ApiFetcher
 {
+	// https://hacker-news.firebaseio.com/v0/topstories.json
+	// topstories
+	// newstories
+	// beststories
+	// askstories
+	// showstories
+	// jobstories
+	
 	private $typeArray = array(
 		'topstories',
 		'newstories',
@@ -16,34 +24,32 @@ class ApiFetcher
 		'jobstories'
 	);
 
+	private $baseUrl = 'https://hacker-news.firebaseio.com/v0/';
+
   public function getItems($apiUrl)
   {
 		$client = new Client();
 		$res = $client->request('GET', $apiUrl);
-		return $res->getBody();
+		return $res;
   }
 
-  public function getItemById($baseUrl, $id)
+  public function getItemById($apiUrl, $id)
   {
 		$client = new Client();
-		$res = $client->request('GET', $apiUrl . '/' . $id);
-		return $res->getBody();
+		$res = $client->request('GET', $apiUrl . $id . '.json');
+		return $res;
   }
 
   public function getStories($dataType) 
   {
-		// https://hacker-news.firebaseio.com/v0/topstories.json
-		// topstories
-		// newstories
-		// beststories
-		// askstories
-		// showstories
-		// jobstories
-
+		$typeArray = $this->typeArray;
 		if (!in_array($dataType, $typeArray)) {
 			return;
 		}
 
-
+		$baseUrl = $this->baseUrl;
+		$client = new Client();
+		$res = $client->request('GET', $baseUrl . $dataType . '.json');
+		return $res;
   }
 }
