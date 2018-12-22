@@ -45,10 +45,10 @@ class NewsController
 
     public function getItems(Application $app)
     {
-        $apiFetcher = $app['api.fetcher'];
+        $ApiFetcherService = $app['api.fetcher.service'];
 
         try {
-            $result = $apiFetcher->getItems('https://hacker-news.firebaseio.com/v0/user/jl.json');
+            $result = $ApiFetcherService->getItems('https://hacker-news.firebaseio.com/v0/user/jl.json');
         } catch(GuzzleException $exception) {
             return $exception;
         } catch (NotFoundHttpException $exception) {

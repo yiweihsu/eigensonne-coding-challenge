@@ -5,7 +5,7 @@ namespace Services;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
-class ApiFetcher
+class ApiFetcherService
 {
 	// https://hacker-news.firebaseio.com/v0/topstories.json
 	// topstories

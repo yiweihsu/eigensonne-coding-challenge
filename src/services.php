@@ -1,8 +1,8 @@
 <?php
 
-use Services\ApiFetcher;
+use Services\ApiFetcherService;
 use GuzzleHttp\Client;
 
-$app['api.fetcher'] = function ($app) {
-  return new ApiFetcher();
+$app['api.fetcher.service'] = function ($app) {
+  return new ApiFetcherService();
 };
