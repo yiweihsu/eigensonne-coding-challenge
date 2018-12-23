@@ -13,50 +13,39 @@ use GuzzleHttp\Exception\GuzzleException;
 
 class NewsController
 {
-    public function getPosts()
+    // public function getItems(Application $app)
+    // {
+    //     $ApiFetcherService = $app['api.fetcher.service'];
+    //     return $result;
+    // }
+
+    public function getBestStories(Application $app)
     {
-
-        $blogPosts = array(
-            1 => array(
-                'date'      => '2011-03-29',
-                'author'    => 'igorw',
-                'title'     => 'Using Silex',
-                'body'      => '...',
-            ),
-        );
-
-        $output = '';
-        foreach ($blogPosts as $post) {
-            $output .= $post['title'];
-            $output .= '<br />';
-        }
-
-        return $output;
+        // ServiceCallerService->getItem('best');
+        // something like this
     }
 
-    public function getTopstories()
+    public function getNewsItems(Application $app)
     {
-        $client = new Client();
-        $res = $client->request('GET', 'https://hacker-news.firebaseio.com/v0/user/jl.json');
-        echo $res->getStatusCode();
-        echo $res->getHeader('content-type');
-        return $res->getBody();
     }
 
-    public function getItems(Application $app)
+    public function getNewestItems(Application $app)
     {
-        $ApiFetcherService = $app['api.fetcher.service'];
+    }
 
-        try {
-            $result = $ApiFetcherService->getItems('https://hacker-news.firebaseio.com/v0/user/jl.json');
-        } catch(GuzzleException $exception) {
-            return $exception;
-        } catch (NotFoundHttpException $exception) {
-            return $exception;
-        } catch (\Exception $exception) {
-            return $exception;
-        }
+    public function getComment(Application $app)
+    {
+    }
 
-        return $result;
+    public function getShowStories(Application $app)
+    {
+    }
+
+    public function getAskStories(Application $app)
+    {
+    }
+
+    public function getJobsStories(Application $app)
+    {
     }
 }
