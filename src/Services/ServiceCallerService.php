@@ -5,47 +5,36 @@ namespace Services;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
-class DataCallerService
+class ServiceCallerService
 {
-  private $dataType;
+
   private $url;
   private $data;
-  private $result;
 
-  function __construct($dataType, UrlMapperService $urlMapperService, ApiFetcherService $apiFetcherService, DataProcessorService $dataProcessorService) 
+  function __construct($dataType, UrlMapperService $urlMapperService, ApiFetcherService $apiFetcherService) 
   { 
-    $this->dataType = $dataType;
-    $this->url = $urlMapperService->getUrl(dataType);
-    $this->data = $apiFetcherService->getData(url);
-    $this->result = $dataProcessorService->getResult(data);
+    // init services
+    $this->url = $urlMapperService->getUrl($dataType);
+    $this->data = $apiFetcherService->getData($this->url);
   } 
 
-  public function getNewsTemplate() {
+  public function getUrl()
+  {
+    return $this->url;
+  }
+
+  public function getData() 
+  {
+    return $this->data;
+  }
+
+  private function itemLoopFetcher($data) { 
     /* 
-      /
-      /news
-      /newest
+      refetch the data in while loop until there's no
+        return template with resulte
     */
-
-    // return result;
-  }
-
-
-  public function getStoriesTemplate()
-  {
-    /*
-      /show
-      /ask
-    */
-  }
-
-  public function getCommentsTemplate()
-  {
-    // /comments
-  }
-
-  public function getJobsTemplate()
-  {
-    // /job
+    foreach ($data as $item) {
+      return item;
+    }
   }
 }
