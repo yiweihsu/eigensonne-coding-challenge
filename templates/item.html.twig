@@ -1,33 +1,42 @@
 {% extends "layout.html.twig" %}
 {% block content %}
-    <table class="table table-striped hackerNews">
-        {% for news in data %}
-            <tr>
-                <td>
-                    {{ news.order }}. <a href="{{ news.url }}" target="_blank">{{ news.title }}</a>
-                    {% if news.host is defined %}
-                        <a class="text-muted"
-                           href="{{ websiteUrl }}/from?site={{ news.host }}"
-                           target="_blank">({{ news.host }})</a>
-                    {% endif %}
-                    <small>posted</small> {{ news.time }}
-                    <small>by</small>
-                    <a href="{{ websiteUrl }}/user?id={{ news.by }}" target="_blank">{{ news.by }}</a>
-                    {% if news.descendants is defined and news.descendants > 0 %}
-                        | <a target="_blank"
-                             href="{{ websiteUrl }}/item?id={{ news.id }}">{{ news.descendants }}
-                        comment{% if news.descendants > 1 %}s{% endif %}</a>
-                    {% endif %}
-                    | {{ news.score }} point{% if news.score > 1 %}s{% endif %}
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
+        <table class="ui single line table">
+            {% for news in data %}
+                <tbody>
+                    <tr>
+                        <td class="itemContent">
+                            {# TODO loop index #}
+                            {{ loop.index }}. <a class="title" href="{{ news.url }}" target="_blank">{{ news.title }}</a>
 
-    <br>
+                            {% if news.host is defined %}
+                                <a class="text-muted"
+                                href="{{ websiteUrl }}/from?site={{ news.host }}"
+                                target="_blank">({{ news.host }})</a>
+                            {% endif %}
+                            
+                            <br>
+                            <small>posted</small> {{ news.time }}
 
-    {# <a href="{{ nextUrl }}">Next</a> #}
+                            <small>by</small>
+
+                            <a class="by" href="{{ websiteUrl }}/user?id={{ news.by }}" target="_blank">{{ news.by }}</a>
+
+                            {% if news.descendants is defined and news.descendants > 0 %}
+                                | <a class="comment" target="_blank"
+                                    href="{{ websiteUrl }}/item?id={{ news.id }}">{{ news.descendants }}
+                                    comment{% if news.descendants > 1 %}s{% endif %}
+                                </a>
+                            {% endif %}
+
+                            | {{ news.score }} point{% if news.score > 1 %}s{% endif %}
+                        </td>
+                    </tr>
+                </tbody>
+            {% endfor %}
+        </table>
+
+
     {% if nextPage %}
-        <a class="mb-4" href="{{ nextPage }}">More</a>
+        <a class="ui secondary basic button" href="{{ nextPage }}">More</a>
     {% endif %}
 {% endblock %}

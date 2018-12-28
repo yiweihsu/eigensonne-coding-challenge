@@ -1,18 +1,11 @@
 {% block content %}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="{{ path('homepage') }}">Hacker News</a>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ path('newest') }}">new</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ path('show') }}">show</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ path('ask') }}">ask</a>
-                </li>
-            </ul>
+    <h3><a class="ui header" href="{{ path('homepage') }}">Hacker News</a></h3>
+    <nav>
+        <div class="ui three item menu">
+            <a class="item" href="{{ path('news') }}">news</a>
+            {# <a class="item" href="{{ path('newest') }}">newest</a> #}
+            <a class="item" href="{{ path('show') }}">show</a>
+            <a class="item" href="{{ path('ask') }}">ask</a>
         </div>
     </nav>
 {% endblock %}

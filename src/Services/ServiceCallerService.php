@@ -23,8 +23,14 @@ class ServiceCallerService
     $data = $this->apiFetcherService->getData($url);
     $jsonData = json_decode($data->getBody(), TRUE);
 
-    // limit the amount of data retrival depending on the page
-    $pageParams = basename($_SERVER['REQUEST_URI']);
+    if(!isset($_SERVER['REQUEST_URI'])) {
+      // only for unit test
+      $pageParams = 2;
+    } else {
+      // limit the amount of data retrival depending on the page
+      $pageParams = basename($_SERVER['REQUEST_URI']);
+    }
+
     $pageNum = (int) substr($pageParams, -1);
     // var_dump($pageNum);
     $beginIndexOfArray = 0;
@@ -36,30 +42,28 @@ class ServiceCallerService
     return $resultForTemplate;
   }
 
-  // pass the page as parameter
   private function itemLoopFetcher($data, $beginIndexOfArray) { 
     $dataArr = [];
     $i = $beginIndexOfArray;
-    while($i < $beginIndexOfArray + 30) { // TODO make it faster
+
+    while($i < $beginIndexOfArray + 30) {
+
+      // check if there's still data 
+      if (empty($data[$i])) {
+        if (count($dataArr) > 0) {
+          return $dataArr;
+        }
+        return; // TODO return a non-data template
+      }
+
       $itemUrl = $this->urlMapperService->getItemUrl($data[$i]);
       $result = $this->apiFetcherService->getData($itemUrl);
       $jsonResult = json_decode($result->getBody(), TRUE);
       $dataArr[$i] = $jsonResult;
       $i++;
     }
+
     // var_dump($dataArr); 
     return $dataArr;
-  }
-
-  // for testing
-  public function getUrl()
-  {
-    return $this->url;
-  }
-
-  // for testing
-  public function getData() 
-  {
-    return $this->data;
   }
 }

@@ -21,8 +21,11 @@
 
     </head>
     <body>
-        {% include 'navbar.html.twig' %}
-        {% block content %}
-        {% endblock %}
+        <div class="ui container">
+            {% include 'navbar.html.twig' %}
+            {% block content %}
+            {% endblock %}
+            {% include 'footer.html.twig' %}
+        </div>
     </body>
 </html>
