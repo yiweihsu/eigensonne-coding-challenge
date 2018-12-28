@@ -3,9 +3,7 @@
 namespace Services;
 
 class UrlMapperService
-{
-  // https://hacker-news.firebaseio.com/v0/topstories.json
-  
+{  
 	private $baseUrl = 'https://hacker-news.firebaseio.com/v0/';
   private $category;
 
@@ -13,11 +11,11 @@ class UrlMapperService
     $this->category = $category;
     switch ($category) {
       case 'best':  // root url
-      case 'newest':
+      case 'new':
       case 'top':
       case 'show':
       case 'ask':
-      case 'jobs':
+      case 'job':
         $url = $this->getStoryUrl($category);
         break;
       case 'newcomments':
