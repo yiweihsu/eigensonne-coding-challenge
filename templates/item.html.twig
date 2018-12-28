@@ -1,0 +1,33 @@
+{% extends "layout.html.twig" %}
+{% block content %}
+    <table class="table table-striped hackerNews">
+        {% for news in data %}
+            <tr>
+                <td>
+                    {{ news.order }}. <a href="{{ news.url }}" target="_blank">{{ news.title }}</a>
+                    {% if news.host is defined %}
+                        <a class="text-muted"
+                           href="{{ websiteUrl }}/from?site={{ news.host }}"
+                           target="_blank">({{ news.host }})</a>
+                    {% endif %}
+                    <small>posted</small> {{ news.time }}
+                    <small>by</small>
+                    <a href="{{ websiteUrl }}/user?id={{ news.by }}" target="_blank">{{ news.by }}</a>
+                    {% if news.descendants is defined and news.descendants > 0 %}
+                        | <a target="_blank"
+                             href="{{ websiteUrl }}/item?id={{ news.id }}">{{ news.descendants }}
+                        comment{% if news.descendants > 1 %}s{% endif %}</a>
+                    {% endif %}
+                    | {{ news.score }} point{% if news.score > 1 %}s{% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+
+    {# <a href="{{ nextUrl }}">Next</a> #}
+    {% if nextPage %}
+        <a class="mb-4" href="{{ nextPage }}">More</a>
+    {% endif %}
+{% endblock %}
