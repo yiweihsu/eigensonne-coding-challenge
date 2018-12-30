@@ -35,7 +35,7 @@ class ServiceCallerService
     // var_dump($pageNum);
     $beginIndexOfArray = 0;
     if ($pageNum > 1) {
-      $beginIndexOfArray = ($pageNum - 1) * 30;
+      $beginIndexOfArray = ($pageNum - 1) * 10;
     }
 
     $resultForTemplate = $this->itemLoopFetcher($jsonData, $beginIndexOfArray);
@@ -46,7 +46,7 @@ class ServiceCallerService
     $dataArr = [];
     $i = $beginIndexOfArray;
 
-    while($i < $beginIndexOfArray + 30) {
+    while($i < $beginIndexOfArray + 10) {
 
       // check if there's still data 
       if (empty($data[$i])) {
