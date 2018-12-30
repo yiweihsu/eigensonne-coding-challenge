@@ -32,7 +32,6 @@ class ServiceCallerService
     }
 
     $pageNum = (int) substr($pageParams, -1);
-    // var_dump($pageNum);
     $beginIndexOfArray = 0;
     if ($pageNum > 1) {
       $beginIndexOfArray = ($pageNum - 1) * 10;
@@ -63,7 +62,6 @@ class ServiceCallerService
       $i++;
     }
 
-    // var_dump($dataArr); 
     return $dataArr;
   }
 }
